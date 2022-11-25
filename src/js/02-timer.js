@@ -23,47 +23,47 @@ const Refs = {
 };
 
 const fp = flatpickr('#datetime-picker', options);
-console.log(fp);
 
-fp.config.onChange.push(function (selectedDates, dateStr, fp) {});
-
-let ValidDate = null;
 let id = null;
 const DELAY = 1000;
-
-// console.log(Date.now());
-// console.log(ValidDate);
+// let userTime = [];
 
 Refs.startButtonRef.addEventListener('click', onStartButtonHandle);
 Refs.inputRef.addEventListener('OnClose', OnCloseHandle);
 
 function onStartButtonHandle() {
+  timer();
+}
+
+function OnCloseHandle(event) {
+  userTime = event.target.value;
+  console.log(userTime);
+}
+
+function render({ days, hours, minutes, seconds }) {
+  Refs.hoursValueRef.textContent = pad(days);
+  Refs.daysValueRef.textContent = pad(hours);
+  Refs.minutesValueRef.textContent = pad(minutes);
+  Refs.secondsValueRef.textContent = pad(seconds);
+}
+function timer() {
   const startTime = Date.now();
+
   id = setInterval(() => {
     const currentTime = Date.now();
-    console.log(startTime - currentTime);
-    // ValidDate = userTime - time;
-    // console.log(convertMs(ValidDate));
+    const deltaTime = startTime - currentTime;
+    if (deltaTime === 0) {
+      window.alert('Please choose a date in the future');
+      clearInterval(id);
+      return;
+    }
 
-    render();
+    const { days, hours, minutes, seconds } = convertMs(deltaTime);
+    console.log(`${pad(days)}:${pad(hours)}:${pad(minutes)}:${pad(seconds)} `);
     Refs.startButtonRef.setAttribute('disabled', true);
+    render({ days, hours, minutes, seconds });
   }, DELAY);
 }
-
-function OnCloseHandle() {
-  ValidDate = fp.selectedDates[0].getTime() - Date.now();
-  console.log(ValidDate);
-  // if (ValidDate <= 0) {
-  //   window.alert('Please choose a date in the future');
-  // }
-}
-function render() {
-  userTime = fp.selectedDates[0].getTime();
-  // console.log(userTime);
-  // Refs.hoursValueRef.textContent = convertMs(time);
-}
-
-render();
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -84,8 +84,6 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
 console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
 
 function pad(value) {
