@@ -31,6 +31,7 @@ flatpickr('#datetime-picker', options);
 // глобальні змінні
 let startTime = 0;
 const DELAY = 1000;
+let id = null;
 
 // посилання на кнопку, табло таймеру
 const Refs = {
@@ -58,7 +59,7 @@ function render({ days, hours, minutes, seconds }) {
 // запускаємо зворотній таймер, дату передаємо зі змінної startTime.
 // конвертуємо дату у форматі хх:xx:xx:xx і записуємо дані у табло через рендер
 function timer() {
-  setInterval(() => {
+  id = setInterval(() => {
     const currentTime = Date.now();
     const deltaTime = startTime - currentTime;
 
@@ -66,6 +67,10 @@ function timer() {
     console.log(`${pad(days)}:${pad(hours)}:${pad(minutes)}:${pad(seconds)} `);
     Refs.startButtonRef.setAttribute('disabled', true);
     render({ days, hours, minutes, seconds });
+
+    if (deltaTime <= 0) {
+      clearInterval(id);
+    }
   }, DELAY);
 }
 

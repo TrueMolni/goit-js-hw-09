@@ -49,3 +49,33 @@ function onSubmitHandle(event) {
 Notiflix.Notify.success(`✅ Fulfilled promise position in delay ms`, {
   timeout: 2000,
 });
+
+// const Refs = {
+//   delayRef: document.querySelector("input[name='delay']"),
+//   stepRef: document.querySelector("input[name='step']"),
+//   amountRef: document.querySelector("input[name='amount']"),
+//   submitRef: document.querySelector('button'),
+// };
+
+// function createPromise(position, delay) {
+//   let nextDelay = 0;
+//   nextDelay += delay;
+//   const shouldResolve = Math.random() > 0.3;
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       if (shouldResolve) {
+//         resolve(console.log('yay promise'));
+//       } else {
+//         reject(console.log("can't create promise"));
+//       }
+//     }, nextDelay);
+//   });
+// }
+
+// createPromise(2, 1500)
+//   .then(({ position, delay }) => {
+//     console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
+//   })
+//   .catch(({ position, delay }) => {
+//     console.log(`❌ Rejected promise ${position} in ${delay}ms`);
+//   });
