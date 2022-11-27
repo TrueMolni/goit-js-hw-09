@@ -23,8 +23,12 @@ const Refs = {
   submitRef: document.querySelector('button'),
   formRef: document.querySelector('form'),
 };
+let firstDelay = 0;
+let step = 0;
+let amount = 0;
 
-Refs.submitRef.addEventListener('submit', onSubmitHandle);
+Refs.formRef.addEventListener('submit', onSubmitHandle);
+Refs.formRef.addEventListener('input', onFormHandle);
 
 function onSubmitHandle(event) {
   event.preventDefault();
@@ -63,9 +67,7 @@ Notiflix.Notify.success(`✅ Fulfilled promise position in delay ms`, {
 //   });
 // }
 
-Refs.formRef.addEventListener('click', onFormHandle);
-
-function onFormHandle(e) {
-  console.log(e.target);
-  console.log(e.currentTarget);
+function onFormHandle() {
+  formData.email = refs.inputRef.value;
+  formData.message = refs.textareaRef.value;
 }
