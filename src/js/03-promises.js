@@ -24,7 +24,7 @@ const Refs = {
   formRef: document.querySelector('form'),
 };
 
-Refs.submitRef.addEventListener('click', onSubmitHandle);
+Refs.submitRef.addEventListener('submit', onSubmitHandle);
 
 function onSubmitHandle(event) {
   event.preventDefault();
@@ -62,3 +62,10 @@ Notiflix.Notify.success(`✅ Fulfilled promise position in delay ms`, {
 //     }, nextDelay);
 //   });
 // }
+
+Refs.formRef.addEventListener('click', onFormHandle);
+
+function onFormHandle(e) {
+  console.log(e.target);
+  console.log(e.currentTarget);
+}
