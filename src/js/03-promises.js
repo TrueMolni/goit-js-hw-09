@@ -13,6 +13,7 @@ Refs.formRef.addEventListener('input', onFormHandle);
 let delay;
 let step;
 let amount;
+let position;
 
 function onSubmitHandle(event) {
   event.preventDefault();
