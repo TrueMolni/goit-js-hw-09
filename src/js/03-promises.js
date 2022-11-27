@@ -10,6 +10,10 @@ const Refs = {
 Refs.formRef.addEventListener('submit', onSubmitHandle);
 Refs.formRef.addEventListener('input', onFormHandle);
 
+let delay;
+let step;
+let amount;
+
 function onSubmitHandle(event) {
   event.preventDefault();
 
